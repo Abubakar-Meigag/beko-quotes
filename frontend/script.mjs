@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:3055";
+const API_URL = "https://beko-quotes.hosting.codeyourfuture.io/";
 
 async function fetchQuote() {
   const response = await fetch(API_URL);
