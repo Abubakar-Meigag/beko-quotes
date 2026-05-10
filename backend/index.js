@@ -3,7 +3,7 @@ import cors from "cors";
 import quotes from "./data/quotes-data.json" with { type: "json" };
 
 const app = express();
-const port = 3055;
+const port = 3000;
 
 
 app.use(cors());
