@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import quotes from "./data/quotes-data.json" assert { type: "json" };
+import quotes from "./data/quotes-data.json" with { type: "json" };
 
 const app = express();
 const port = 3055;
