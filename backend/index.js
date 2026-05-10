@@ -1,19 +1,10 @@
 import express from "express";
 import cors from "cors";
+import quotes from "./data/quotes-data.json" assert { type: "json" };
 
 const app = express();
 const port = 3055;
 
-const quotes = [
-  {
-    quote: "Either write something worth reading or do something worth writing.",
-    author: "Benjamin Franklin",
-  },
-  {
-    quote: "I should have been more kind.",
-    author: "Clive James",
-  },
-];
 
 app.use(cors());
 app.use(express.json())
@@ -27,33 +18,6 @@ app.get("/", (req, res) => {
   console.error("Received a request for a quote");
   const quote = pickRandomQuote();
   res.send(`"${quote.quote}" -${quote.author}`);
-});
-
-
-app.post("/", (req, res) => {
-  const bodyBytes = [];
-  req.on("data", chunk => bodyBytes.push(...chunk));
-  req.on("end", () => {
-    const bodyString = String.fromCharCode(...bodyBytes);
-    let body;
-    try {
-      body = JSON.parse(bodyString);
-    } catch (error) {
-      console.error(`Failed to parse body ${bodyString} as JSON: ${error}`);
-      res.status(400).send("Expected body to be JSON.");
-      return;
-    }
-    if (typeof body != "object" || !("quote" in body) || !("author" in body)) {
-      console.error(`Failed to extract quote and author from post body: ${bodyString}`);
-      res.status(400).send("Expected body to be a JSON object containing keys quote and author.");
-      return;
-    }
-    quotes.push({
-      quote: body.quote,
-      author: body.author,
-    });
-    res.send("ok");
-  });
 });
 
 app.listen(port, () => {
