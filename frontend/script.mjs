@@ -1,5 +1,5 @@
 
-const API_URL = "https://beko-quotes.hosting.codeyourfuture.io/";
+const API_URL = "https://beko-quotes.trainees.hosting.cyf.academy";
 
 async function fetchQuote() {
   const response = await fetch(API_URL);
